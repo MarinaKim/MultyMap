@@ -17,25 +17,27 @@ switch (n) {
 	for_each
 	*/
 case 1: {
-	/*multimap<string, Book> bs;
+	multimap<string, Book> bs;
 	ifstream in_file("books.txt");
 	string title, author;
+	size_t yy, count;
 	while (!in_file.eof()) {
-		in_file >> author >> title;
-		bs.insert(pair<string, Book>(author, Book(author, title)));
+		in_file >> author >> title>>yy>>count;
+		bs.insert(pair<string, Book>(author, Book(author, title,yy,count)));
 	}
-	for_each(bs.begin(), bs.end(), print);*/
+	for_each(bs.begin(), bs.end(), print);
 
 }break;
 	//вывод по авторам
 case 2: {
-	/*multimap<string, Book> bs;
+	multimap<string, Book> bs;
 	ifstream in_file("books.txt");
 	set<string> as;
 	string title, author;
+	size_t yy, count;
 	while (!in_file.eof()) {
-		in_file >> author >> title;
-		bs.insert(pair<string, Book>(author, Book(author, title)));
+		in_file >> author >> title >> yy >> count;
+		bs.insert(pair<string, Book>(author, Book(author, title, yy, count)));
 	}
 	for (auto it = bs.begin();it != bs.end(); it++)
 		as.insert(it->first);
@@ -47,7 +49,7 @@ case 2: {
 		for_each(itr.first, itr.second, print);
 		cout << endl;
 		cout <<endl;
-	}*/
+	}
 }break;
 
 	/*Вариант 3,7 
@@ -105,25 +107,22 @@ case 3: {
 		}
 
 	}break;
+
+		//delete by author
 	case 2: {
 		string b;
 		cout << "Enter the author: ";
 		cin >> b;
-		auto it = bs.find(author);
-		if (it != bs.end())
-		{
-			bs.erase(it->first);
-		}
-		/*for (auto it = bs.begin();it != bs.end(); it++) {
-			if (it->first == b) {
-				bs.erase(it->first);
-			}				
-		}*/
 		
+			for (auto it = as.begin(); it != as.end(); it++) {
+				auto itr = bs.equal_range(*it);
+				if(itr.first->first==b)
+				bs.erase(itr.first);				
+			}
 			for_each(bs.begin(), bs.end(), print);
-	
-		
 	}break;
+
+		// print by author
 	case 3: {
 		string name;
 		cout << "Enter an author: ";
@@ -136,6 +135,7 @@ case 3: {
 			}
 		}
 	}break;
+		//print by year
 	case 4: {
 		size_t year;
 		cout << "Enter an year: ";
