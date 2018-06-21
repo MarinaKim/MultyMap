@@ -149,7 +149,34 @@ case 3: {
 		}
 
 	}break;
+		//лямда-функция
+	case 5: {
+		/*string name;
+		cout << "Enter an author: ";
+		cin >> name;*/
+		for (auto it = as.begin(); it != as.end(); it++) {
+			auto itr = bs.equal_range(*it);
+			for_each(itr.first, itr.second, [](pair<string, Book> e) {
+				cout << e.second << endl;
+			});
+		}
 
+	}break;
+		//лямда-функция со значением
+	case 6: {
+		string name;
+		cout << "Enter an author: ";
+		cin >> name;
+		for (auto it = as.begin(); it != as.end(); it++) {
+			auto itr = bs.equal_range(*it);
+			for_each(itr.first, itr.second, [name](pair<string, Book> e) {
+				if (e.second.getAuthor() == name)
+					cout << e.second << endl;
+
+			});
+		}
+
+	}break;
 	}
 
 }break;

@@ -23,6 +23,8 @@ public:
 		os << obj.author << "\t" << obj.title <<"\t"<<obj.yy<<"\t"<<obj.count<< endl;
 		return os;
 	}
+
+	string getAuthor() { return author; }
 	bool operator ==(size_t yy) {
 		return (this->yy == yy);
 	}
